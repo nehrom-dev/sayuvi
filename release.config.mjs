@@ -36,12 +36,13 @@ export default {
       },
     ],
     ["@semantic-release/changelog", { changelogFile: "CHANGELOG.md" }],
-    // npmPublish: false, плагин только поднимает версию в package.json
+
     ["@semantic-release/npm", { npmPublish: false }],
     [
       "@semantic-release/git",
       {
         assets: ["package.json", "CHANGELOG.md"],
+        // biome-ignore lint/suspicious/noTemplateCurlyInString: semantic-release template syntax
         message: "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
       },
     ],
