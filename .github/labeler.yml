@@ -1,0 +1,50 @@
+frontend:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "src/app/**"
+          - "src/components/**"
+          - "app/**"
+          - "components/**"
+          - "public/**"
+
+styles:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.css"
+          - "**/*.scss"
+          - "tailwind.config.*"
+          - "postcss.config.*"
+
+api:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "src/app/api/**"
+          - "app/api/**"
+          - "src/pages/api/**"
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "package.json"
+          - "bun.lock"
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**"
+          - "lefthook.yml"
+
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.md"
+          - "docs/**"
+
+config:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "next.config.*"
+          - "tsconfig.json"
+          - "biome.json*"
+          - "commitlint.config.*"
+          - "release.config.*"
