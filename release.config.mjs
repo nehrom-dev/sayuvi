@@ -1,6 +1,8 @@
+const isMain = (process.env.GITHUB_REF_NAME ?? "") === "main";
+
 /** @type {import('semantic-release').GlobalConfig} */
 export default {
-  branches: ["main", { name: "next", prerelease: "beta" }],
+  branches: ["main", { name: "dev", prerelease: "beta" }],
   plugins: [
     [
       "@semantic-release/commit-analyzer",
@@ -35,17 +37,20 @@ export default {
         },
       },
     ],
-    ["@semantic-release/changelog", { changelogFile: "CHANGELOG.md" }],
-
+    ...(isMain ? [["@semantic-release/changelog", { changelogFile: "CHANGELOG.md" }]] : []),
     ["@semantic-release/npm", { npmPublish: false }],
-    [
-      "@semantic-release/git",
-      {
-        assets: ["package.json", "CHANGELOG.md"],
-        // biome-ignore lint/suspicious/noTemplateCurlyInString: semantic-release template syntax
-        message: "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
-      },
-    ],
+    ...(isMain
+      ? [
+          [
+            "@semantic-release/git",
+            {
+              assets: ["package.json", "CHANGELOG.md"],
+              // biome-ignore lint/suspicious/noTemplateCurlyInString: semantic-release template syntax
+              message: "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
+            },
+          ],
+        ]
+      : []),
     "@semantic-release/github",
   ],
 };
